@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Лаборатория открытий | Запись</title>
-    <!-- Подключение шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #1A1E24;
@@ -22,16 +16,12 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
-        /* Основной контейнер */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
             flex: 1;
         }
-
-        /* Шапка с логотипом */
         .logo {
             text-align: center;
             margin-bottom: 2rem;
@@ -55,8 +45,6 @@
             margin-top: 0.5rem;
             font-weight: 500;
         }
-
-        /* Основная карточка формы */
         .form-card {
             background: rgba(11, 26, 42, 0.6);
             backdrop-filter: blur(2px);
@@ -67,7 +55,6 @@
             max-width: 700px;
             margin: 0 auto;
         }
-
         h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.9rem;
@@ -81,19 +68,14 @@
             margin-bottom: 2rem;
             color: #b0b7c0;
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
+        .form-group { margin-bottom: 1.5rem; }
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #F0B300;
         }
-
-        input, .form-group input {
+        input {
             width: 100%;
             padding: 12px 16px;
             background: #0F1217;
@@ -104,13 +86,11 @@
             transition: all 0.2s;
             font-family: 'Roboto', sans-serif;
         }
-
         input:focus {
             outline: none;
             border-color: #F0B300;
             box-shadow: 0 0 0 2px rgba(240, 179, 0, 0.3);
         }
-
         .checkbox-group {
             display: flex;
             align-items: flex-start;
@@ -133,10 +113,6 @@
             text-decoration: none;
             border-bottom: 1px dashed;
         }
-        .checkbox-group a:hover {
-            color: #FFB347;
-        }
-
         .btn-submit {
             background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
             border: none;
@@ -155,8 +131,6 @@
             transform: scale(1.02);
             box-shadow: 0 10px 20px -5px rgba(240, 179, 0, 0.4);
         }
-
-        /* Футер */
         footer {
             background: #0F1217;
             text-align: center;
@@ -176,15 +150,6 @@
             text-decoration: none;
             font-size: 0.9rem;
         }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        .copyright {
-            font-size: 0.75rem;
-            color: #6c757d;
-        }
-
-        /* Модальные окна (попап реквизитов и документы) */
         .modal {
             display: none;
             position: fixed;
@@ -229,9 +194,6 @@
             border-radius: 24px;
             margin: 1rem 0;
         }
-        .payment-details p {
-            margin: 8px 0;
-        }
         .btn-close-modal {
             background: #F0B300;
             border: none;
@@ -242,17 +204,10 @@
             cursor: pointer;
             width: 100%;
         }
-
         @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
-            }
-            .form-card {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
+            .container { padding: 1rem; }
+            .form-card { padding: 1.5rem; }
+            h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -268,26 +223,24 @@
         <h1>Запись на программу</h1>
         <div class="subhead">Заполните форму, чтобы получить реквизиты для оплаты</div>
 
-        <!-- ФОРМА: данные отправляются на почту через formspree -->
         <form id="bookingForm" action="https://formspree.io/f/xbdznedy" method="POST">
-            <!-- Поле для защиты от спама formspree -->
             <input type="text" name="_gotcha" style="display:none">
             
             <div class="form-group">
                 <label>ФИО родителя / законного представителя *</label>
-                <input type="text" name="parent_name" required placeholder="Иванов Иван Иванович">
+                <input type="text" name="parent_name" id="parent_name" required placeholder="Иванов Иван Иванович">
             </div>
             <div class="form-group">
                 <label>Имя ребенка *</label>
-                <input type="text" name="child_name" required placeholder="Александр">
+                <input type="text" name="child_name" id="child_name" required placeholder="Александр">
             </div>
             <div class="form-group">
                 <label>Email *</label>
-                <input type="email" name="email" required placeholder="parent@example.com">
+                <input type="email" name="email" id="email" required placeholder="parent@example.com">
             </div>
             <div class="form-group">
                 <label>Телефон *</label>
-                <input type="tel" name="phone" required placeholder="+7 900 123-45-67">
+                <input type="tel" name="phone" id="phone" required placeholder="+7 900 123-45-67">
             </div>
 
             <div class="checkbox-group">
@@ -313,7 +266,6 @@
     <div class="copyright">© Лаборатория открытий — все права защищены</div>
 </footer>
 
-<!-- Модальное окно для реквизитов после отправки -->
 <div id="paymentModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closePaymentModal">&times;</span>
@@ -333,332 +285,143 @@
     </div>
 </div>
 
-<!-- Модальные окна для документов (Оферта, Согласие, Политика) -->
 <div id="docModal" class="modal">
     <div class="modal-content" style="max-width: 700px;">
         <span class="close" id="closeDocModal">&times;</span>
-        <div id="docContent">
-            <!-- динамическое содержимое -->
-        </div>
+        <div id="docContent"></div>
     </div>
 </div>
 
 <script>
-    // ------ Данные для документов (три страницы) ------
+document.addEventListener('DOMContentLoaded', function() {
     const docs = {
         offer: {
             title: "Договор оферты",
-            text: `<h3>Публичная оферта</h3>
-            <p>ИП «Лаборатория открытий» предлагает заключить договор на оказание услуг на следующих условиях:</p>
-            <p>1. Предмет договора: проведение развивающих занятий для детей согласно выбранной программе.</p>
-            <p>2. Стоимость услуг определяется в момент записи и фиксируется в реквизитах.</p>
-            <p>3. Оплата производится путем перевода денежных средств по реквизитам, указанным после заполнения формы.</p>
-            <p>4. Отмена брони: не позднее чем за 24 часа до начала занятия возможен возврат полной суммы. В ином случае услуга считается оказанной.</p>
-            <p>5. Все споры решаются в соответствии с законодательством РФ.</p>
-            <p>Настоящая оферта действует бессрочно.</p>`
+            text: `<h3>Публичная оферта</h3><p>1. Предмет договора: проведение развивающих занятий для детей.</p><p>2. Стоимость определяется в момент записи.</p><p>3. Оплата по реквизитам после заполнения формы.</p><p>4. Отмена брони: за 24 часа — возврат.</p><p>5. Споры по законодательству РФ.</p>`
         },
         personal: {
             title: "Согласие на обработку персональных данных",
-            text: `<h3>Согласие на обработку персональных данных</h3>
-            <p>Я, заполняя форму на сайте, даю согласие ИП «Лаборатория открытий» (ОГРН 1234567890123) на обработку моих персональных данных: ФИО, телефон, email, данные ребенка — с целью заключения договора, оказания услуг, направления чеков и информационных рассылок.</p>
-            <p>Согласие дается на срок до 5 лет, может быть отозвано письменным уведомлением на адрес компании.</p>
-            <p>Оператор обеспечивает конфиденциальность данных и не передает их третьим лицам, кроме случаев, установленных законом.</p>`
+            text: `<h3>Согласие на обработку персональных данных</h3><p>Я даю согласие на обработку: ФИО, телефон, email, данные ребенка.</p><p>Цель: заключение договора, оказание услуг.</p><p>Срок: 5 лет.</p>`
         },
         privacy: {
             title: "Политика конфиденциальности",
-            text: `<h3>Политика конфиденциальности</h3>
-            <p>1. Сайт собирает только информацию, предоставленную пользователем добровольно через форму записи.</p>
-            <p>2. Персональные данные используются исключительно для выполнения обязательств перед клиентом (запись, оплата, обратная связь).</p>
-            <p>3. Мы используем защищенные каналы связи и не храним данные дольше необходимого срока.</p>
-            <p>4. Пользователь вправе запросить удаление своих данных, направив письмо на support@labotkrytiy.ru.</p>
-            <p>5. Сайт может использовать cookies для улучшения работы, но без передачи персональной информации третьим лицам.</p>`
+            text: `<h3>Политика конфиденциальности</h3><p>1. Собираем данные из формы.</p><p>2. Используем для выполнения обязательств.</p><p>3. Защищенные каналы связи.</p>`
         }
     };
 
-    // ========== НОВАЯ ФУНКЦИЯ: Скачивание документа в PDF ==========
-    function downloadAsPDF(docKey) {
+    // ========== PDF ==========
+    window.downloadAsPDF = function(docKey) {
         const doc = docs[docKey];
         if (!doc) return;
-        
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>${doc.title}</title>
-                <style>
-                    body {
-                        font-family: 'Roboto', 'Arial', sans-serif;
-                        padding: 40px;
-                        max-width: 800px;
-                        margin: 0 auto;
-                        line-height: 1.6;
-                        color: #1A1E24;
-                    }
-                    h1, h2, h3 {
-                        color: #B86B0F;
-                    }
-                    .header {
-                        text-align: center;
-                        margin-bottom: 30px;
-                        padding-bottom: 20px;
-                        border-bottom: 2px solid #F0B300;
-                    }
-                    .logo-text {
-                        font-size: 24px;
-                        font-weight: bold;
-                        color: #B86B0F;
-                    }
-                    .date {
-                        color: #666;
-                        font-size: 12px;
-                        margin-top: 10px;
-                    }
-                    .footer {
-                        margin-top: 40px;
-                        text-align: center;
-                        color: #666;
-                        font-size: 11px;
-                        border-top: 1px solid #ddd;
-                        padding-top: 20px;
-                    }
-                    @media print {
-                        body {
-                            padding: 20px;
-                        }
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <div class="logo-text">Лаборатория открытий</div>
-                    <div class="date">Дата формирования: ${new Date().toLocaleDateString('ru-RU')}</div>
-                </div>
-                <h1>${doc.title}</h1>
-                ${doc.text}
-                <div class="footer">
-                    © Лаборатория открытий — официальный документ
-                </div>
-                <script>
-                    window.onload = () => {
-                        setTimeout(() => {
-                            window.print();
-                            window.onafterprint = () => window.close();
-                        }, 500);
-                    };
-                <\/script>
-            </body>
-            </html>
-        `);
-        printWindow.document.close();
-    }
-
-    // ========== ОБНОВЛЁННАЯ ФУНКЦИЯ: Открытие документа с кнопкой PDF ==========
-    function openDocModal(docKey) {
-        const doc = docs[docKey];
-        if(doc) {
-            const modal = document.getElementById('docModal');
-            const contentDiv = document.getElementById('docContent');
-            contentDiv.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(240,179,0,0.3); padding-bottom: 0.75rem;">
-                    <h2 style="color:#F0B300; margin:0;">${doc.title}</h2>
-                    <button onclick="downloadAsPDF('${docKey}')" style="background:#F0B300; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-weight:bold; color:#1A1E24; font-size:0.9rem;">
-                        📄 Скачать PDF
-                    </button>
-                </div>
-                <div style="line-height: 1.6;">
-                    ${doc.text}
-                </div>
-            `;
-            modal.style.display = 'flex';
-        }
-    }
-
-    // Добавляем слушатели для ссылок на документы
-    document.querySelectorAll('.doc-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const docType = link.getAttribute('data-doc');
-            if(docType) openDocModal(docType);
-        });
-    });
-
-    // Закрытие модалки документов
-    const docModal = document.getElementById('docModal');
-    const closeDocModalBtn = document.getElementById('closeDocModal');
-    closeDocModalBtn.onclick = () => docModal.style.display = 'none';
-    
-    // Модалка реквизитов
-    const paymentModal = document.getElementById('paymentModal');
-    const closePaymentModal = document.getElementById('closePaymentModal');
-    const closePaymentBtn = document.getElementById('closePaymentBtn');
-    
-    function closePaymentModals() {
-        paymentModal.style.display = 'none';
-    }
-    closePaymentModal.onclick = closePaymentModals;
-    closePaymentBtn.onclick = closePaymentModals;
-    
-    window.onclick = (e) => {
-        if(e.target === docModal) docModal.style.display = 'none';
-        if(e.target === paymentModal) paymentModal.style.display = 'none';
+        const win = window.open('', '_blank');
+        win.document.write(`<html><head><title>${doc.title}</title><style>body { font-family: sans-serif; padding: 40px; line-height: 1.6; } h1 { color: #B86B0F; }</style></head><body><h1>${doc.title}</h1>${doc.text}</body></html>`);
+        win.document.close();
+        win.print();
     };
 
+    // ========== МОДАЛКИ ==========
+    window.openDocModal = function(docKey) {
+        const doc = docs[docKey];
+        const modal = document.getElementById('docModal');
+        const contentDiv = document.getElementById('docContent');
+        contentDiv.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #F0B300; padding-bottom: 10px;">
+                <h2 style="color:#F0B300; margin:0;">${doc.title}</h2>
+                <button onclick="downloadAsPDF('${docKey}')" style="background:#F0B300; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-weight:bold;">📄 Скачать PDF</button>
+            </div>
+            <div>${doc.text}</div>`;
+        modal.style.display = 'flex';
+    };
+
+    document.querySelectorAll('.doc-link').forEach(link => {
+        link.addEventListener('click', (e) => { e.preventDefault(); openDocModal(link.getAttribute('data-doc')); });
+    });
+
+    const paymentModal = document.getElementById('paymentModal');
+    
+    // Закрытие ТОЛЬКО по кнопкам
+    document.getElementById('closeDocModal').onclick = () => document.getElementById('docModal').style.display = 'none';
+    document.getElementById('closePaymentModal').onclick = () => paymentModal.style.display = 'none';
+    document.getElementById('closePaymentBtn').onclick = () => paymentModal.style.display = 'none';
+
+    // Блок window.onclick УДАЛЕН. Теперь клик в пустоту ничего не закрывает.
+
+    // ========== ОБРАБОТКА ФОРМЫ (МГНОВЕННАЯ) ==========
     const form = document.getElementById('bookingForm');
-    
-    // Telegram настройки
-    const BOT_TOKEN = 'BOT_TOKEN';
-    const CHAT_ID = 'CHAT_ID';
-    
-    // ========== НОВАЯ ФУНКЦИЯ: Получение IP-адреса ==========
+    const WORKER_URL = 'https://tg-proxy.excursorsf.workers.dev';
+
     async function getUserIP() {
         try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            return data.ip;
-        } catch (error) {
-            console.error('Ошибка получения IP:', error);
-            return 'не удалось определить';
-        }
+            const r = await fetch('https://api.ipify.org?format=json');
+            const d = await r.json();
+            return d.ip;
+        } catch { return 'не определен'; }
     }
-    
-    // ========== НОВАЯ ФУНКЦИЯ: Отправка в Telegram с временем и IP ==========
-    async function sendToTelegram(parentName, childName, email, phone) {
-        const userIP = await getUserIP();
-        const now = new Date();
-        const formattedTime = now.toLocaleString('ru-RU', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        
-        const message = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n` +
-            `👤 Родитель: ${parentName}\n` +
-            `📞 Телефон: ${phone}\n` +
-            `📧 Email: ${email}\n` +
-            `🧒 Ребенок: ${childName}\n\n` +
-            `✅ С офертой ознакомлен\n` +
-            `✅ Согласие на обработку данных предоставлено\n\n` +
-            `🕐 Время заявки: ${formattedTime}\n` +
-            `🌐 IP адрес: ${userIP}`;
-        
-        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-        
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            });
-            
-            if (response.ok) {
-                console.log('✅ Telegram: сообщение отправлено');
-            } else {
-                console.error('❌ Telegram: ошибка', response.status);
-            }
-        } catch (error) {
-            console.error('❌ Telegram: сеть', error);
-        }
-    }
-    
-    // ========== ОБНОВЛЁННЫЙ ОБРАБОТЧИК ФОРМЫ ==========
-    form.addEventListener('submit', async (e) => {
+
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Проверка чекбоксов
-        if (!document.getElementById('offer_agree').checked) {
-            alert('Пожалуйста, примите условия оферты');
-            return;
-        }
-        if (!document.getElementById('consent_agree').checked) {
-            alert('Пожалуйста, дайте согласие на обработку данных');
-            return;
-        }
-        
-        // Сбор полей
-        const parentName = document.querySelector('input[name="parent_name"]').value.trim();
-        const childName = document.querySelector('input[name="child_name"]').value.trim();
-        const email = document.querySelector('input[name="email"]').value.trim();
-        const phone = document.querySelector('input[name="phone"]').value.trim();
-        
-        if (!parentName || !childName || !email || !phone) {
-            alert('Все поля обязательны для заполнения!');
-            return;
-        }
-        
-        // Отправляем в Telegram с временем и IP
-        await sendToTelegram(parentName, childName, email, phone);
-        
-        // Отправляем в Formspree
-        const formData = new FormData(form);
-        
-        // Добавляем время и IP в сообщение для почты
-        const userIP = await getUserIP();
-        const now = new Date();
-        const formattedTime = now.toLocaleString('ru-RU', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        
-        const fullMessageForEmail = `🟡 НОВАЯ ЗАПИСЬ\n\n` +
-            `Родитель: ${parentName}\n` +
-            `Телефон: ${phone}\n` +
-            `Email: ${email}\n` +
-            `Ребенок: ${childName}\n\n` +
-            `С офертой ознакомлен\n` +
-            `Согласие на обработку данных предоставлено\n\n` +
-            `Время заявки: ${formattedTime}\n` +
-            `IP адрес: ${userIP}`;
-        
-        formData.append('full_message', fullMessageForEmail);
-        
-                try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                // ДОБАВЛЯЕМ ЭТОТ БЛОК:
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                console.log('✅ Данные успешно отправлены в Formspree');
-                
-                // Здесь можно добавить логику после успеха:
-                // form.reset(); 
-                // paymentModal.style.display = 'flex';
-            } else {
-                // Если пришла ошибка 422 (например, неверный email)
-                const errorData = await response.json();
-                console.error('❌ Ошибка валидации Formspree:', errorData);
-                alert('Ошибка при заполнении: ' + (errorData.errors ? errorData.errors[0].message : 'проверьте данные'));
-            }
-        } catch (error) {
-            // Теперь сюда будут попадать только реальные ошибки сети
-            console.error('❌ Критическая ошибка отправки:', error);
-        }
-        
-        // Показываем попап с реквизитами
-        const childSpan = document.getElementById('childNamePlaceholder');
-        if(childSpan) childSpan.innerText = childName;
+        // 1. СРАЗУ берем данные
+        const parentName = form.querySelector('[name="parent_name"]').value;
+        const childName = form.querySelector('[name="child_name"]').value;
+        const email = form.querySelector('[name="email"]').value;
+        const phone = form.querySelector('[name="phone"]').value;
+
+        // 2. МГНОВЕННО показываем реквизиты
+        document.getElementById('childNamePlaceholder').textContent = childName;
         paymentModal.style.display = 'flex';
         
-        // Сбрасываем форму
+        // Сбрасываем форму, чтобы она была готова к новой записи
         form.reset();
+
+        // 3. ОТПРАВЛЯЕМ В ФОНЕ
+        const ip = await getUserIP();
+        const time = new Date().toLocaleString('ru-RU');
+
+        const tgMessage = 
+            `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n` +
+            `👤 <b>Родитель:</b> ${parentName}\n` +
+            `🧒 <b>Ребенок:</b> ${childName}\n` +
+            `📞 <b>Телефон:</b> ${phone}\n` +
+            `📧 <b>Email:</b> ${email}\n\n` +
+            `✅ <b>С офертой ознакомлен:</b> ДА\n` +
+            `✅ <b>Согласие на обработку данных:</b> ДА\n\n` +
+            `🕐 <b>Время:</b> ${time}\n` +
+            `🌐 <b>IP:</b> ${ip}`;
+
+        const emailMessage = 
+            `🟡 НОВАЯ ЗАПИСЬ\n\n` +
+            `👤 Родитель: ${parentName}\n` +
+            `🧒 Ребенок: ${childName}\n` +
+            `📞 Телефон: ${phone}\n` +
+            `📧 Email: ${email}\n\n` +
+            `✅ С офертой ознакомлен: ДА\n` +
+            `✅ Согласие на обработку данных: ДА\n\n` +
+            `🕐 Время: ${time}\n` +
+            `🌐 IP: ${ip}`;
+
+        // Фоновая отправка (fetch без await)
+        fetch(WORKER_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ message: tgMessage })
+        }).catch(err => console.error('TG Error:', err));
+
+        const formData = new FormData();
+        formData.append('parent_name', parentName);
+        formData.append('child_name', childName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('full_log', emailMessage);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {'Accept': 'application/json'}
+        }).catch(err => console.error('Formspree Error:', err));
     });
+});
 </script>
+
 </body>
 </html>
