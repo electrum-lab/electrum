@@ -391,16 +391,7 @@
             </div>
             <div class="form-group">
                 <label>Телефон *</label>
-                <input
-  type="tel"
-  name="phone"
-  id="phone"
-  required
-  inputmode="numeric"
-  autocomplete="tel"
-  placeholder="+7 (___) ___-__-__"
-  pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
->
+                
             </div>
             <div class="checkbox-group">
                 <input type="checkbox" id="offer_agree" required>
@@ -1294,127 +1285,28 @@ document.getElementById('closePaymentBtn').onclick = closePay;
 
 const form = document.getElementById('bookingForm');
 const PROXY_URL = 'https://tg-proxy.excursorsf.workers.dev';
-// ===== Маска телефона РФ: +7 (XXX) XXX-XX-XX =====
-const phoneInput = document.getElementById('phone');
-const PHONE_PREFIX = '+7 ';
 
-function formatPhoneFromAny(raw) {
-    let digits = (raw || '').replace(/\D/g, '');
-
-    // Если вставили +7... или 8... -> убираем первую цифру страны
-    if (digits.startsWith('7') || digits.startsWith('8')) {
-        digits = digits.slice(1);
-    }
-
-    // Только 10 цифр (код + номер)
-    digits = digits.slice(0, 10);
-
-    let out = PHONE_PREFIX;
-
-    if (digits.length > 0) out += '(' + digits.slice(0, 3);
-    if (digits.length >= 3) out += ') ';
-    if (digits.length > 3) out += digits.slice(3, 6);
-    if (digits.length >= 6) out += '-';
-    if (digits.length > 6) out += digits.slice(6, 8);
-    if (digits.length >= 8) out += '-';
-    if (digits.length > 8) out += digits.slice(8, 10);
-
-    return out;
-}
-
-function caretToEnd() {
-    requestAnimationFrame(() => {
-        const len = phoneInput.value.length;
-        phoneInput.setSelectionRange(len, len);
-    });
-}
-
-function initPhoneField() {
-    phoneInput.value = PHONE_PREFIX;
-}
-
-// Инициализация при загрузке
-initPhoneField();
-
-phoneInput.addEventListener('focus', () => {
-    if (!phoneInput.value.startsWith(PHONE_PREFIX)) initPhoneField();
-    caretToEnd();
-});
-
-phoneInput.addEventListener('click', () => {
-    if (phoneInput.selectionStart < PHONE_PREFIX.length) caretToEnd();
-});
-
-phoneInput.addEventListener('keydown', (e) => {
-    // Разрешаем служебные клавиши
-    const allowed = ['Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End'];
-    if (allowed.includes(e.key)) return;
-
-    // Не даём удалить префикс +7
-    if ((e.key === 'Backspace' || e.key === 'Delete') &&
-        phoneInput.selectionStart <= PHONE_PREFIX.length &&
-        phoneInput.selectionEnd <= PHONE_PREFIX.length) {
-        e.preventDefault();
-        return;
-    }
-});
-
-phoneInput.addEventListener('input', () => {
-    phoneInput.value = formatPhoneFromAny(phoneInput.value);
-
-    // Курсор всегда после +7...
-    if (phoneInput.selectionStart < PHONE_PREFIX.length) {
-        caretToEnd();
-    }
-});
-
-phoneInput.addEventListener('paste', (e) => {
-    e.preventDefault();
-    const text = (e.clipboardData || window.clipboardData).getData('text');
-    phoneInput.value = formatPhoneFromAny(text);
-    caretToEnd();
-});
-
-function getPhoneDigits10() {
-    // Из "+7 (999) 123-45-67" -> "9991234567"
-    return phoneInput.value.replace(/\D/g, '').replace(/^7/, '').slice(0, 10);
-}
 form.onsubmit = async (e) => {
     e.preventDefault();
-
-    const parentName = document.getElementById('parent_name').value.trim();
-    const childName = document.getElementById('child_name').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    const phoneDigits = getPhoneDigits10();
-    if (phoneDigits.length !== 10) {
-        phoneInput.setCustomValidity('Введите телефон полностью: +7 (XXX) XXX-XX-XX');
-        phoneInput.reportValidity();
-        return;
-    }
-    phoneInput.setCustomValidity('');
-
-    const phoneFormatted = `+7 (${phoneDigits.slice(0,3)}) ${phoneDigits.slice(3,6)}-${phoneDigits.slice(6,8)}-${phoneDigits.slice(8,10)}`;
-    phoneInput.value = phoneFormatted; // фиксируем красивый формат в поле
+    
+    const parentName = document.getElementById('parent_name').value;
+    const childName = document.getElementById('child_name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
 
     document.getElementById('childNamePlaceholder').textContent = childName;
     document.getElementById('paymentModal').style.display = 'flex';
+    form.reset();
 
     const time = new Date().toLocaleString('ru-RU');
     let ip = 'определяется...';
-    try {
+    try { 
         const res = await fetch('https://api.ipify.org?format=json');
         ip = (await res.json()).ip;
     } catch(e) {}
 
-    const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phoneFormatted}\n📧 Email: ${email}\n\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
-    const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phoneFormatted}\nEmail: ${email}\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\nВремя: ${time}\nIP: ${ip}`;
-
-    // ВАЖНО: FormData собираем до reset()
-    const fd = new FormData(form);
-    fd.set('phone', phoneFormatted);
-    fd.append('phone_e164', `+7${phoneDigits}`);
-    fd.append('full_log', emailLog);
+    const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phone}\n📧 Email: ${email}\n\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
+    const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phone}\nEmail: ${email}\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\nВремя: ${time}\nIP: ${ip}`;
 
     fetch(PROXY_URL, {
         method: 'POST',
@@ -1422,15 +1314,13 @@ form.onsubmit = async (e) => {
         body: JSON.stringify({ message: tgMsg })
     }).catch(err => console.error('TG Error:', err));
 
+    const fd = new FormData(form);
+    fd.append('full_log', emailLog);
     fetch(form.action, {
         method: 'POST',
         body: fd,
         headers: {'Accept': 'application/json'}
     }).catch(err => console.error('Email Error:', err));
-
-    // Сбрасываем форму только после формирования/отправки данных
-    form.reset();
-    initPhoneField();
 };
 </script>
 </body>
