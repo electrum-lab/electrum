@@ -485,33 +485,67 @@ function initPhoneMask() {
 initPhoneMask();
 
 // Остальной код
-const docs = {
-    offer: { title: "Договор оферты", text: "<h3>Оферта</h3><p>Условия договора...</p>" },
-    personal: { title: "Согласие на обработку", text: "<h3>Согласие</h3><p>Я разрешаю обработку...</p>" },
-    privacy: { title: "Приватность", text: "<h3>Политика</h3><p>Ваши данные в безопасности.</p>" }
+let docsMeta = {};
+const docsCache = {};
+
+async function loadDocsMeta() {
+    const res = await fetch('/docs/docs.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('Не удалось загрузить docs.json');
+    docsMeta = await res.json();
+}
+
+async function getDoc(key) {
+    const meta = docsMeta[key];
+    if (!meta) throw new Error(`Документ "${key}" не найден`);
+
+    if (!docsCache[key]) {
+        const res = await fetch(meta.file, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`Не удалось загрузить файл: ${meta.file}`);
+        docsCache[key] = await res.text();
+    }
+
+    return { title: meta.title, text: docsCache[key] };
+}
+
+window.downloadAsPDF = async function(key) {
+    try {
+        const doc = await getDoc(key);
+        const win = window.open('', '_blank');
+        win.document.write(`<html><body style="padding:40px;font-family:sans-serif;"><h1>${doc.title}</h1>${doc.text}</body></html>`);
+        win.document.close();
+        win.print();
+    } catch (e) {
+        alert('Ошибка загрузки документа для PDF');
+        console.error(e);
+    }
 };
 
-window.downloadAsPDF = function(key) {
-    const doc = docs[key];
-    const win = window.open('', '_blank');
-    win.document.write(`<html><body style="padding:40px;font-family:sans-serif;"><h1>${doc.title}</h1>${doc.text}</body></html>`);
-    win.document.close();
-    win.print();
+window.openDocModal = async function(key) {
+    try {
+        const doc = await getDoc(key);
+        document.getElementById('docContent').innerHTML = `
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
+                <h2>${doc.title}</h2>
+                <button onclick="downloadAsPDF('${key}')" style="background:#F0B300;border:none;padding:5px 15px;border-radius:20px;cursor:pointer;">📄 PDF</button>
+            </div>
+            <div>${doc.text}</div>`;
+        document.getElementById('docModal').style.display = 'flex';
+    } catch (e) {
+        alert('Не удалось открыть документ');
+        console.error(e);
+    }
 };
 
-window.openDocModal = function(key) {
-    const doc = docs[key];
-    document.getElementById('docContent').innerHTML = `
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
-            <h2>${doc.title}</h2>
-            <button onclick="downloadAsPDF('${key}')" style="background:#F0B300;border:none;padding:5px 15px;border-radius:20px;cursor:pointer;">📄 PDF</button>
-        </div>
-        <div>${doc.text}</div>`;
-    document.getElementById('docModal').style.display = 'flex';
-};
+document.querySelectorAll('loadDocsMeta().catch(err => {
+    console.error(err);
+    alert('Ошибка загрузки документов');
+});
 
 document.querySelectorAll('.doc-link').forEach(link => {
-    link.onclick = (e) => { e.preventDefault(); openDocModal(link.dataset.doc); };
+    link.onclick = async (e) => {
+        e.preventDefault();
+        await openDocModal(link.dataset.doc);
+    };
 });
 
 document.getElementById('closeDocModal').onclick = () => document.getElementById('docModal').style.display = 'none';
