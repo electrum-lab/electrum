@@ -7,7 +7,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background-color: #1A1E24; color: #E0E0E0; line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
+        body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #010114;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 45%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%),
+        radial-gradient(circle at 50% 70%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 35%),
+        radial-gradient(circle, rgba(255,255,255,0.6) 1px, rgba(255,255,255,0) 1px),
+        linear-gradient(135deg, #030317 0%, #070a1c 60%, #0f1f3e 100%);
+    background-size:
+        300px 300px,
+        400px 400px,
+        250px 250px,
+        2px 2px,
+        cover;
+    background-attachment: fixed;
+    color: #E0E0E0;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+        ::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.4;
+    pointer-events: none;
+    animation: twinkle 8s linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes twinkle {
+    0% { transform: translate3d(0, 0, 0); opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { transform: translate3d(5%, -5%, 0); opacity: 0.3; }
+}
+        
+        { font-family: 'Roboto', sans-serif; background-color: #1A1E24; color: #E0E0E0; line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; }
         .logo { text-align: center; margin-bottom: 2rem; }
         .logo-symbol { font-size: 3.5rem; font-weight: 800; color: #F0B300; font-family: 'Montserrat', sans-serif; display: inline-block; background: rgba(240, 179, 0, 0.1); padding: 0.25rem 1rem; border-radius: 60px; letter-spacing: 2px; }
