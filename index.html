@@ -473,8 +473,8 @@ form.onsubmit = async (e) => {
         ip = (await res.json()).ip;
     } catch(e) {}
 
-    const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phone}\n📧 Email: ${email}\n\n✅ Оферта: ДА\n✅ Данные: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
-    const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phone}\nEmail: ${email}\nОферта/Данные: ПРИНЯТО\nВремя: ${time}\nIP: ${ip}`;
+    const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phone}\n📧 Email: ${email}\n\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
+    const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phone}\nEmail: ${email}\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\nВремя: ${time}\nIP: ${ip}`;
 
     fetch(PROXY_URL, {
         method: 'POST',
