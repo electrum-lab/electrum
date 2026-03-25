@@ -35,7 +35,7 @@
             z-index: -1;
         }
         
-        .star {
+        .star {/* Падающая звезда */
             position: absolute;
             background: white;
             border-radius: 50%;
@@ -47,56 +47,67 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
-/* Падающая звезда */
+/* Падающая звезда / комета */
+.shooting-star {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 190px;
+    height: 14px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: shoot 3s linear infinite;
+}
+
+/* Хвост */
 .shooting-star::before {
     content: '';
     position: absolute;
-    top: 20%;
-    left: -10%;
-    width: 180px;
+    top: 50%;
+    left: 0;
+    width: 170px;
     height: 4px;
-    border-radius: 50px;
-    /* Градиент теперь под углом -15deg, как и движение */
-    background: linear-gradient(-15deg,
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: linear-gradient(90deg,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 55%,
-        rgba(255, 255, 255, 0) 100%);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
-    animation: shoot 3s linear infinite;
-    opacity: 0;
-    /* Поворачиваем весь элемент на -15deg */
-    transform: rotate(-15deg);
-    transform-origin: right center;
+        rgba(255, 255, 255, 0.06) 35%,
+        rgba(255, 255, 255, 0.20) 60%,
+        rgba(255, 255, 255, 0.55) 82%,
+        rgba(255, 255, 255, 0.95) 100%);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
 }
 
+/* Ядро кометы */
 .shooting-star::after {
     content: '';
     position: absolute;
-    top: 20%;
-    left: -5%;
-    width: 12px;
-    height: 12px;
+    top: 50%;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    transform: translateY(-50%);
     border-radius: 50%;
     background: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(240, 200, 120, 0.6);
-    animation: shoot 3s linear infinite;
-    opacity: 0;
+    box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.95),
+        0 0 24px rgba(240, 200, 120, 0.55);
 }
 
 @keyframes shoot {
     0% {
-        transform: translate3d(-30vw, -10vh, 0) rotate(-15deg);
+        transform: translate(-25vw, 10vh) rotate(22deg) scale(0.8);
         opacity: 0;
     }
-    10% {
+    8% {
         opacity: 1;
     }
-    60% {
-        transform: translate3d(110vw, 60vh, 0) rotate(-15deg);
+    70% {
         opacity: 1;
     }
     100% {
-        transform: translate3d(140vw, 80vh, 0) rotate(-15deg);
+        transform: translate(105vw, 55vh) rotate(22deg) scale(1);
         opacity: 0;
     }
 }
