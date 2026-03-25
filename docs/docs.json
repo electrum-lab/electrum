@@ -1,5 +1,0 @@
-{
-  "offer":   { "title": "Договор оферты", "file": "/docs/offer.html" },
-  "personal":{ "title": "Согласие на обработку", "file": "/docs/personal.html" },
-  "privacy": { "title": "Приватность", "file": "/docs/privacy.html" }
-}
