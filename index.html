@@ -7,208 +7,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #1A1E24;
-            color: #E0E0E0;
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            flex: 1;
-        }
-        .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .logo-symbol {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #F0B300;
-            font-family: 'Montserrat', sans-serif;
-            display: inline-block;
-            background: rgba(240, 179, 0, 0.1);
-            padding: 0.25rem 1rem;
-            border-radius: 60px;
-            letter-spacing: 2px;
-        }
-        .logo-desc {
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #F0B300;
-            margin-top: 0.5rem;
-            font-weight: 500;
-        }
-        .form-card {
-            background: rgba(11, 26, 42, 0.6);
-            backdrop-filter: blur(2px);
-            border-radius: 32px;
-            padding: 2rem;
-            border: 1px solid rgba(240, 179, 0, 0.2);
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.9rem;
-            font-weight: 700;
-            color: #F0B300;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        .subhead {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #b0b7c0;
-        }
+        body { font-family: 'Roboto', sans-serif; background-color: #1A1E24; color: #E0E0E0; line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; }
+        .logo { text-align: center; margin-bottom: 2rem; }
+        .logo-symbol { font-size: 3.5rem; font-weight: 800; color: #F0B300; font-family: 'Montserrat', sans-serif; display: inline-block; background: rgba(240, 179, 0, 0.1); padding: 0.25rem 1rem; border-radius: 60px; letter-spacing: 2px; }
+        .logo-desc { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #F0B300; margin-top: 0.5rem; font-weight: 500; }
+        .form-card { background: rgba(11, 26, 42, 0.6); backdrop-filter: blur(2px); border-radius: 32px; padding: 2rem; border: 1px solid rgba(240, 179, 0, 0.2); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4); max-width: 700px; margin: 0 auto; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 1.9rem; font-weight: 700; color: #F0B300; margin-bottom: 0.5rem; text-align: center; }
+        .subhead { text-align: center; margin-bottom: 2rem; color: #b0b7c0; }
         .form-group { margin-bottom: 1.5rem; }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #F0B300;
-        }
-        input {
-            width: 100%;
-            padding: 12px 16px;
-            background: #0F1217;
-            border: 1px solid #2c313a;
-            border-radius: 16px;
-            font-size: 1rem;
-            color: #FFFFFF;
-            transition: all 0.2s;
-            font-family: 'Roboto', sans-serif;
-        }
-        input:focus {
-            outline: none;
-            border-color: #F0B300;
-            box-shadow: 0 0 0 2px rgba(240, 179, 0, 0.3);
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 1rem;
-        }
-        .checkbox-group input {
-            width: 20px;
-            height: 20px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: 400;
-            color: #E0E0E0;
-        }
-        .checkbox-group a {
-            color: #F0B300;
-            text-decoration: none;
-            border-bottom: 1px dashed;
-        }
-        .btn-submit {
-            background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
-            border: none;
-            width: 100%;
-            padding: 14px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            color: #1A1E24;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 0.5rem;
-        }
-        .btn-submit:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px -5px rgba(240, 179, 0, 0.4);
-        }
-        footer {
-            background: #0F1217;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-            border-top: 1px solid #2c313a;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .footer-links a {
-            color: #F0B300;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #1A1E24;
-            border-radius: 32px;
-            max-width: 500px;
-            width: 90%;
-            padding: 2rem;
-            border: 1px solid #F0B300;
-            position: relative;
-            color: #E0E0E0;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .modal-content h3 {
-            color: #F0B300;
-            margin-bottom: 1rem;
-            font-size: 1.6rem;
-        }
-        .modal-content .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #F0B300;
-        }
-        .payment-details {
-            background: #0B1A2A;
-            padding: 1rem;
-            border-radius: 24px;
-            margin: 1rem 0;
-        }
-        .btn-close-modal {
-            background: #F0B300;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            font-weight: bold;
-            margin-top: 1rem;
-            cursor: pointer;
-            width: 100%;
-        }
-        @media (max-width: 600px) {
-            .container { padding: 1rem; }
-            .form-card { padding: 1.5rem; }
-            h1 { font-size: 1.5rem; }
-        }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #F0B300; }
+        input { width: 100%; padding: 12px 16px; background: #0F1217; border: 1px solid #2c313a; border-radius: 16px; font-size: 1rem; color: #FFFFFF; transition: all 0.2s; font-family: 'Roboto', sans-serif; }
+        input:focus { outline: none; border-color: #F0B300; box-shadow: 0 0 0 2px rgba(240, 179, 0, 0.3); }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; }
+        .checkbox-group input { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
+        .checkbox-group label { margin-bottom: 0; font-weight: 400; color: #E0E0E0; }
+        .checkbox-group a { color: #F0B300; text-decoration: none; border-bottom: 1px dashed; cursor: pointer; }
+        .btn-submit { background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%); border: none; width: 100%; padding: 14px; font-size: 1.2rem; font-weight: 700; font-family: 'Montserrat', sans-serif; color: #1A1E24; border-radius: 40px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 0.5rem; }
+        .btn-submit:hover { transform: scale(1.02); box-shadow: 0 10px 20px -5px rgba(240, 179, 0, 0.4); }
+        footer { background: #0F1217; text-align: center; padding: 1.5rem; margin-top: 3rem; border-top: 1px solid #2c313a; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .footer-links a { color: #F0B300; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #1A1E24; border-radius: 32px; max-width: 500px; width: 90%; padding: 2rem; border: 1px solid #F0B300; position: relative; color: #E0E0E0; max-height: 85vh; overflow-y: auto; }
+        .modal-content h3 { color: #F0B300; margin-bottom: 1rem; font-size: 1.6rem; }
+        .modal-content .close { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #F0B300; }
+        .payment-details { background: #0B1A2A; padding: 1rem; border-radius: 24px; margin: 1rem 0; }
+        .btn-close-modal { background: #F0B300; border: none; padding: 10px 20px; border-radius: 40px; font-weight: bold; margin-top: 1rem; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
@@ -218,52 +43,45 @@
         <div class="logo-symbol">Э</div>
         <div class="logo-desc">лаборатория открытий</div>
     </div>
-
     <div class="form-card">
         <h1>Запись на программу</h1>
         <div class="subhead">Заполните форму, чтобы получить реквизиты для оплаты</div>
-
         <form id="bookingForm" action="https://formspree.io/f/xbdznedy" method="POST">
-            <input type="text" name="_gotcha" style="display:none">
-            
             <div class="form-group">
-                <label>ФИО родителя / законного представителя *</label>
-                <input type="text" name="parent_name" id="parent_name" required placeholder="Иванов Иван Иванович">
+                <label>ФИО родителя *</label>
+                <input type="text" name="parent_name" id="parent_name" required>
             </div>
             <div class="form-group">
                 <label>Имя ребенка *</label>
-                <input type="text" name="child_name" id="child_name" required placeholder="Александр">
+                <input type="text" name="child_name" id="child_name" required>
             </div>
             <div class="form-group">
                 <label>Email *</label>
-                <input type="email" name="email" id="email" required placeholder="parent@example.com">
+                <input type="email" name="email" id="email" required>
             </div>
             <div class="form-group">
                 <label>Телефон *</label>
-                <input type="tel" name="phone" id="phone" required placeholder="+7 900 123-45-67">
+                <input type="tel" name="phone" id="phone" required>
             </div>
-
             <div class="checkbox-group">
                 <input type="checkbox" id="offer_agree" required>
-                <label for="offer_agree">Подтверждаю, что ознакомлен с <a href="#" class="doc-link" data-doc="offer">условиями офферты</a> *</label>
+                <label for="offer_agree">Я ознакомлен с <a class="doc-link" data-doc="offer">офертой</a> *</label>
             </div>
             <div class="checkbox-group">
                 <input type="checkbox" id="consent_agree" required>
-                <label for="consent_agree">Подтверждаю согласие на обработку персональных данных (<a href="#" class="doc-link" data-doc="personal">ссылка на согласие</a>) *</label>
+                <label for="consent_agree">Даю согласие на <a class="doc-link" data-doc="personal">обработку данных</a> *</label>
             </div>
-
-            <button type="submit" class="btn-submit">Записаться и получить реквизиты для оплаты</button>
+            <button type="submit" class="btn-submit">Записаться</button>
         </form>
     </div>
 </div>
 
 <footer>
     <div class="footer-links">
-        <a href="#" class="doc-link" data-doc="offer">Договор оферты</a>
-        <a href="#" class="doc-link" data-doc="personal">Согласие на обработку данных</a>
-        <a href="#" class="doc-link" data-doc="privacy">Политика конфиденциальности</a>
+        <a class="doc-link" data-doc="offer">Оферта</a>
+        <a class="doc-link" data-doc="personal">Согласие</a>
+        <a class="doc-link" data-doc="privacy">Приватность</a>
     </div>
-    <div class="copyright">© Лаборатория открытий — все права защищены</div>
 </footer>
 
 <div id="paymentModal" class="modal">
@@ -271,16 +89,12 @@
         <span class="close" id="closePaymentModal">&times;</span>
         <h3>💎 Реквизиты для оплаты</h3>
         <div class="payment-details">
-            <p><strong>Сумма к оплате:</strong> 4 900 ₽</p>
-            <p><strong>Получатель:</strong> ИП Лаборатория открытий</p>
-            <p><strong>ИНН:</strong> 123456789012</p>
-            <p><strong>Номер счета:</strong> 40802810900000000000</p>
+            <p><strong>Сумма:</strong> 4 900 ₽</p>
             <p><strong>Банк:</strong> Т-Банк</p>
-            <p><strong>Корр. счет:</strong> 30101810100000000000</p>
-            <p><strong>БИК:</strong> 044525974</p>
-            <p><strong>Назначение платежа:</strong> Оплата за образовательные услуги, ФИО ребенка: <span id="childNamePlaceholder"></span></p>
+            <p><strong>Получатель:</strong> ИП Лаборатория открытий</p>
+            <p><strong>Назначение:</strong> Оплата за услуги. Ребенок: <span id="childNamePlaceholder"></span></p>
+            <p style="font-size:0.8rem; opacity:0.6; margin-top:10px;">ИНН: 123456789012 | Р/С: 40802810900000000000</p>
         </div>
-        <p>✅ После успешной оплаты чек будет отправлен на указанную вами электронную почту.</p>
         <button class="btn-close-modal" id="closePaymentBtn">Закрыть</button>
     </div>
 </div>
@@ -295,133 +109,88 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const docs = {
-        offer: {
-            title: "Договор оферты",
-            text: `<h3>Публичная оферта</h3><p>1. Предмет договора: проведение развивающих занятий для детей.</p><p>2. Стоимость определяется в момент записи.</p><p>3. Оплата по реквизитам после заполнения формы.</p><p>4. Отмена брони: за 24 часа — возврат.</p><p>5. Споры по законодательству РФ.</p>`
-        },
-        personal: {
-            title: "Согласие на обработку персональных данных",
-            text: `<h3>Согласие на обработку персональных данных</h3><p>Я даю согласие на обработку: ФИО, телефон, email, данные ребенка.</p><p>Цель: заключение договора, оказание услуг.</p><p>Срок: 5 лет.</p>`
-        },
-        privacy: {
-            title: "Политика конфиденциальности",
-            text: `<h3>Политика конфиденциальности</h3><p>1. Собираем данные из формы.</p><p>2. Используем для выполнения обязательств.</p><p>3. Защищенные каналы связи.</p>`
-        }
+        offer: { title: "Договор оферты", text: "<h3>Оферта</h3><p>Условия договора...</p>" },
+        personal: { title: "Согласие на обработку", text: "<h3>Согласие</h3><p>Я разрешаю обработку...</p>" },
+        privacy: { title: "Приватность", text: "<h3>Политика</h3><p>Ваши данные в безопасности.</p>" }
     };
 
-    // ========== PDF ==========
-    window.downloadAsPDF = function(docKey) {
-        const doc = docs[docKey];
-        if (!doc) return;
+    window.downloadAsPDF = function(key) {
+        const doc = docs[key];
         const win = window.open('', '_blank');
-        win.document.write(`<html><head><title>${doc.title}</title><style>body { font-family: sans-serif; padding: 40px; line-height: 1.6; } h1 { color: #B86B0F; }</style></head><body><h1>${doc.title}</h1>${doc.text}</body></html>`);
+        win.document.write(`<html><body style="padding:40px;font-family:sans-serif;"><h1>${doc.title}</h1>${doc.text}</body></html>`);
         win.document.close();
         win.print();
     };
 
-    // ========== МОДАЛКИ ==========
-    window.openDocModal = function(docKey) {
-        const doc = docs[docKey];
-        const modal = document.getElementById('docModal');
-        const contentDiv = document.getElementById('docContent');
-        contentDiv.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #F0B300; padding-bottom: 10px;">
-                <h2 style="color:#F0B300; margin:0;">${doc.title}</h2>
-                <button onclick="downloadAsPDF('${docKey}')" style="background:#F0B300; border:none; padding:8px 20px; border-radius:30px; cursor:pointer; font-weight:bold;">📄 Скачать PDF</button>
+    window.openDocModal = function(key) {
+        const doc = docs[key];
+        document.getElementById('docContent').innerHTML = `
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
+                <h2>${doc.title}</h2>
+                <button onclick="downloadAsPDF('${key}')" style="background:#F0B300;border:none;padding:5px 15px;border-radius:20px;cursor:pointer;">📄 PDF</button>
             </div>
             <div>${doc.text}</div>`;
-        modal.style.display = 'flex';
+        document.getElementById('docModal').style.display = 'flex';
     };
 
     document.querySelectorAll('.doc-link').forEach(link => {
-        link.addEventListener('click', (e) => { e.preventDefault(); openDocModal(link.getAttribute('data-doc')); });
+        link.onclick = (e) => { e.preventDefault(); openDocModal(link.dataset.doc); };
     });
 
-    const paymentModal = document.getElementById('paymentModal');
-    
     // Закрытие ТОЛЬКО по кнопкам
     document.getElementById('closeDocModal').onclick = () => document.getElementById('docModal').style.display = 'none';
-    document.getElementById('closePaymentModal').onclick = () => paymentModal.style.display = 'none';
-    document.getElementById('closePaymentBtn').onclick = () => paymentModal.style.display = 'none';
+    const closePay = () => document.getElementById('paymentModal').style.display = 'none';
+    document.getElementById('closePaymentModal').onclick = closePay;
+    document.getElementById('closePaymentBtn').onclick = closePay;
 
-    // Блок window.onclick УДАЛЕН. Теперь клик в пустоту ничего не закрывает.
+    // ВАЖНО: Мы удалили window.onclick, чтобы клик по фону не закрывал окна.
 
-    // ========== ОБРАБОТКА ФОРМЫ (МГНОВЕННАЯ) ==========
     const form = document.getElementById('bookingForm');
-    const WORKER_URL = 'https://tg-proxy.excursorsf.workers.dev';
+    const PROXY_URL = 'https://tg-proxy.excursorsf.workers.dev'; // ИСПОЛЬЗУЕМ ВАШ ПРОКСИ
 
-    async function getUserIP() {
-        try {
-            const r = await fetch('https://api.ipify.org?format=json');
-            const d = await r.json();
-            return d.ip;
-        } catch { return 'не определен'; }
-    }
-
-    form.addEventListener('submit', async function(e) {
+    form.onsubmit = async (e) => {
         e.preventDefault();
         
-        // 1. СРАЗУ берем данные
-        const parentName = form.querySelector('[name="parent_name"]').value;
-        const childName = form.querySelector('[name="child_name"]').value;
-        const email = form.querySelector('[name="email"]').value;
-        const phone = form.querySelector('[name="phone"]').value;
+        const parentName = document.getElementById('parent_name').value;
+        const childName = document.getElementById('child_name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
 
-        // 2. МГНОВЕННО показываем реквизиты
+        // 1. Мгновенно открываем реквизиты
         document.getElementById('childNamePlaceholder').textContent = childName;
-        paymentModal.style.display = 'flex';
-        
-        // Сбрасываем форму, чтобы она была готова к новой записи
-        form.reset();
+        document.getElementById('paymentModal').style.display = 'flex';
 
-        // 3. ОТПРАВЛЯЕМ В ФОНЕ
-        const ip = await getUserIP();
+        // 2. Сбор данных для фоновой отправки
         const time = new Date().toLocaleString('ru-RU');
+        let ip = 'определяется...';
+        try { 
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            ip = data.ip;
+        } catch(e) {}
 
-        const tgMessage = 
-            `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n` +
-            `👤 <b>Родитель:</b> ${parentName}\n` +
-            `🧒 <b>Ребенок:</b> ${childName}\n` +
-            `📞 <b>Телефон:</b> ${phone}\n` +
-            `📧 <b>Email:</b> ${email}\n\n` +
-            `✅ <b>С офертой ознакомлен:</b> ДА\n` +
-            `✅ <b>Согласие на обработку данных:</b> ДА\n\n` +
-            `🕐 <b>Время:</b> ${time}\n` +
-            `🌐 <b>IP:</b> ${ip}`;
+        const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phone}\n📧 Email: ${email}\n\n✅ Оферта: ДА\n✅ Данные: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
+        const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phone}\nEmail: ${email}\nОферта/Данные: ПРИНЯТО\nВремя: ${time}\nIP: ${ip}`;
 
-        const emailMessage = 
-            `🟡 НОВАЯ ЗАПИСЬ\n\n` +
-            `👤 Родитель: ${parentName}\n` +
-            `🧒 Ребенок: ${childName}\n` +
-            `📞 Телефон: ${phone}\n` +
-            `📧 Email: ${email}\n\n` +
-            `✅ С офертой ознакомлен: ДА\n` +
-            `✅ Согласие на обработку данных: ДА\n\n` +
-            `🕐 Время: ${time}\n` +
-            `🌐 IP: ${ip}`;
-
-        // Фоновая отправка (fetch без await)
-        fetch(WORKER_URL, {
+        // 3. Отправка в ТГ через ПРОКСИ (чтобы не было ошибки CORS)
+        fetch(PROXY_URL, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ message: tgMessage })
+            body: JSON.stringify({ message: tgMsg })
         }).catch(err => console.error('TG Error:', err));
 
-        const formData = new FormData();
-        formData.append('parent_name', parentName);
-        formData.append('child_name', childName);
-        formData.append('email', email);
-        formData.append('phone', phone);
-        formData.append('full_log', emailMessage);
-
+        // 4. Отправка в Formspree
+        const fd = new FormData(form);
+        fd.append('full_log', emailLog);
         fetch(form.action, {
             method: 'POST',
-            body: formData,
+            body: fd,
             headers: {'Accept': 'application/json'}
-        }).catch(err => console.error('Formspree Error:', err));
-    });
+        }).catch(err => console.error('Email Error:', err));
+
+        form.reset();
+    };
 });
 </script>
-
 </body>
 </html>
