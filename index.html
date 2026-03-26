@@ -671,11 +671,14 @@ document.getElementById('closeDocModal').onclick = () => document.getElementById
 const closePay = () => document.getElementById('paymentModal').style.display = 'none';
 document.getElementById('closePaymentModal').onclick = closePay;
 document.getElementById('closePaymentBtn').onclick = closePay;
+document.getElementById('closeDocBtn').onclick = () => 
+document.getElementById('docModal').style.display = 'none';
 
 const form = document.getElementById('bookingForm');
 const PROXY_URL = 'https://tg-proxy.excursorsf.workers.dev';
 
 form.onsubmit = async (e) => {
+	
     e.preventDefault();
     
     const parentName = document.getElementById('parent_name').value;
