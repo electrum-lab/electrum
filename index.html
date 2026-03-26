@@ -692,6 +692,41 @@ form.onsubmit = async (e) => {
         headers: {'Accept': 'application/json'}
     }).catch(err => console.error('Email Error:', err));
 };
+	// === Обработка прямых ссылок с параметром ?doc= ===
+function openDocFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const docType = params.get('doc');
+    
+    if (docType && ['offer', 'personal', 'privacy'].includes(docType)) {
+        // Небольшая задержка, чтобы страница успела загрузиться
+        setTimeout(() => {
+            openDocModal(docType);
+        }, 600);
+    }
+}
+
+// Запускаем проверку при загрузке страницы
+window.addEventListener('load', openDocFromURL);
+
+// Дополнительно: обновляем URL при открытии модалки (чтобы можно было скопировать ссылку)
+const originalOpenDocModal = window.openDocModal;
+
+window.openDocModal = function(key) {
+    // Вызываем старую функцию
+    originalOpenDocModal(key);
+    
+    // Обновляем адресную строку
+    const newURL = window.location.pathname + '?doc=' + key;
+    history.pushState({doc: key}, '', newURL);
+};
+
+// Возвращаем URL в чистый вид при закрытии модалки
+document.getElementById('closeDocModal').onclick = function() {
+    document.getElementById('docModal').style.display = 'none';
+    
+    // Убираем параметр ?doc= из адресной строки
+    history.replaceState({}, '', window.location.pathname);
+};
 </script>
 </body>
 </html>
