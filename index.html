@@ -457,15 +457,17 @@
         <span class="close" id="closePaymentModal">&times;</span>
         <h3>💎 Реквизиты для оплаты</h3>
         <div class="payment-details">
-            <p><strong>Сумма:</strong> 1000 ₽</p>
-            <p><strong>Банк:</strong> Сбербанк/ВТБ</p>
-            <p><strong>Получатель:</strong> Александров Антон Викторович</p>
-            <p><strong>Комментарий к переводу:</strong> Укажите имя ребёнка</p>
-            <p><strong>Телефон для СБП:</strong> +7(921)578-44-70</p>
-            <p><strong>Номер карты Сбер:</strong> 2202 2061 3412 2824</p>
-            <p><strong>Номер карты ВТБ:</strong> 2200 2418 7959 3154</p>
-            <p style="font-size:0.8rem; opacity:0.6; margin-top:10px;">Чек будет отправлен на указанный вами email</p>
-        </div>
+    <p><strong>Сумма:</strong> 1000 ₽</p>
+    <p><strong>Комментарий к переводу:</strong> Укажите имя ребёнка</p>
+    <p><strong>Получатель:</strong> Александров Антон Викторович</p>
+    <p><strong>Чек:</strong> будет отправлен на указанный вами email</p>
+    
+    <!-- QR-код -->
+    <div style="text-align: center; margin-top: 1rem;">
+        <p><strong>Сканируйте QR-код для оплаты:</strong></p>
+        <img src="qr.jpg" alt="QR-код для оплаты" style="max-width: 200px; width: 100%; height: auto; border: 1px solid rgba(240, 179, 0, 0.5); border-radius: 10px;">
+    </div>
+</div>
         
         <!-- Кнопка закрытия — ОБЯЗАТЕЛЬНА -->
         <button class="btn-close-modal" id="closePaymentBtn">Закрыть</button>
