@@ -359,6 +359,21 @@
         .modal-content .close:hover {
             transform: scale(1.2);
         }
+		/* Стили для модальных окон */
+.modal-content {
+    padding: 1.5rem; /* Уменьшаем отступы для мобильных устройств */
+}
+
+.modal-content h2 {
+    font-size: 1.5rem; /* Уменьшаем размер заголовка для мобильных устройств */
+    margin-bottom: 0.5rem;
+}
+
+.modal-content button {
+    width: 100%; /* Кнопка занимает всю ширину контейнера */
+    padding: 12px; /* Увеличиваем отступы для удобства нажатия */
+    font-size: 1rem; /* Увеличиваем размер текста */
+}
 		/* Скрываем полосу прокрутки для Firefox */
 * {
     scrollbar-width: none;
@@ -624,18 +639,32 @@ window.openDocModal = function(key) {
     // Показываем модалку сразу, с заглушкой
     modal.style.display = 'flex';
     contentEl.innerHTML = `
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
+        <div style="border-bottom:1px solid #F0B300; padding-bottom:10px; margin-bottom:10px;">
             <h2>Загрузка...</h2>
         </div>
         <div><p>Пожалуйста, подождите, документ загружается...</p></div>
     `;
 
-        loadDoc(key)
+    loadDoc(key)
         .then(doc => {
             contentEl.innerHTML = `
-                <div style="display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; border-bottom:1px solid #FFD56B; padding-bottom:15px; margin-bottom:15px; padding-right:50px;">
-    <button onclick="downloadAsPDF('${key}')" style="background:linear-gradient(135deg, #F0B300 0%, #FFB347 100%); border:none; padding:10px 16px; border-radius:11px; cursor:pointer; font-weight:bold; font-family:'Montserrat', sans-serif; color:#1A1E24; white-space:normal; appearance:none; -webkit-appearance:none; box-shadow:none; outline:none; transition:all 0.2s; width:100%; max-width:220px;">📄 Скачать PDF</button>
-</div>
+                <div style="border-bottom:1px solid #FFD56B; padding-bottom:15px; margin-bottom:15px;">
+                    <h2 style="margin: 0; color: #F0B300; font-weight: bold; text-shadow: 0 0 8px rgba(240, 179, 0, 0.2);">${doc.title}</h2>
+                    <button onclick="downloadAsPDF('${key}')" style="
+                        background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        color: #1A1E24;
+                        transition: all 0.2s;
+                        box-shadow: none;
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        margin-top: 10px;
+                    ">📄 Скачать PDF</button>
                 </div>
                 <div>${doc.text}</div>
             `;
@@ -643,7 +672,7 @@ window.openDocModal = function(key) {
         .catch(err => {
             console.error(err);
             contentEl.innerHTML = `
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
+                <div style="border-bottom:1px solid #F0B300; padding-bottom:10px; margin-bottom:10px;">
                     <h2>Ошибка</h2>
                 </div>
                 <div><p>Не удалось загрузить документ. Попробуйте обновить страницу позже.</p></div>
