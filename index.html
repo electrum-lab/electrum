@@ -571,13 +571,16 @@ initPhoneMask();
 // Конфиг документов: какой тип → заголовок и путь к файлу
 const docsConfig = {
     offer: {
-       file: "docs/offer.html"
+        title: "Договор публичной оферты",
+        file: "docs/offer.html"
     },
     personal: {
-       file: "docs/personal.html"
+        title: "Актуально на 2026 год.",
+        file: "docs/personal.html"
     },
     privacy: {
-       file: "docs/privacy.html"
+        title: "Политика конфиденциальности",
+        file: "docs/privacy.html"
     }
 };
 
@@ -631,6 +634,7 @@ window.openDocModal = function(key) {
         .then(doc => {
             contentEl.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F0B300; padding-bottom:15px; margin-bottom:15px;">
+                    <h2 style="margin: 0;">${doc.title}</h2>
                     <button onclick="downloadAsPDF('${key}')" style="background:linear-gradient(135deg, #F0B300 0%, #FFB347 100%); border:none; padding:10px 20px; border-radius:11px; cursor:pointer; font-weight:bold; font-family:'Montserrat', sans-serif; color:#1A1E24; white-space:nowrap; margin-left:15px; margin-right:50px; appearance:none; -webkit-appearance:none; box-shadow:none; outline:none; transition:all 0.2s;">📄 Скачать PDF</button>
                 </div>
                 <div>${doc.text}</div>
