@@ -153,17 +153,22 @@
             text-align: center;
             margin-bottom: 2rem;
         }
-        .logo-symbol {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #F0B300;
-            font-family: 'Montserrat', sans-serif;
-            display: inline-block;
-            background: rgba(240, 179, 0, 0.15);
-            padding: 0.25rem 1rem;
-            border-radius: 60px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(240, 179, 0, 0.5);
+		.logo-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240, 179, 0, 0.15);
+    padding: 0.5rem 1rem;
+    border-radius: 60px;
+    box-shadow: 0 0 20px rgba(240, 179, 0, 0.2);
+}
+
+		.logo-symbol img {
+    max-height: 70px;   /* меняй размер здесь */
+    width: auto;
+    display: block;
+}
+		
         }
         .logo-desc {
             font-size: 0.85rem;
@@ -419,9 +424,11 @@
 
 <div class="container">
     <div class="logo">
-        <div class="logo-symbol">Э</div>
-        <div class="logo-desc">лаборатория открытий</div>
+    <div class="logo-symbol">
+        <img src="logo.png" alt="Электрум">
     </div>
+    <div class="logo-desc">лаборатория открытий</div>
+</div>
     <div class="form-card">
         <h1>Запись на программу</h1>
         <div class="subhead">Заполните форму, чтобы получить реквизиты для оплаты</div>
