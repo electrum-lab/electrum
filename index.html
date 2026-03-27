@@ -359,7 +359,7 @@
         .btn-close-modal {
             background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
             border: none;
-            padding: 5px 20px;
+            padding: 10px 20px;
             border-radius: 40px;
             font-weight: bold;
             margin-top: 1rem;
@@ -604,12 +604,12 @@ window.openDocModal = function(key) {
         <div><p>Пожалуйста, подождите, документ загружается...</p></div>
     `;
 
-    loadDoc(key)
+        loadDoc(key)
         .then(doc => {
             contentEl.innerHTML = `
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid #F0B300;padding-bottom:10px;margin-bottom:10px;">
-                    <h2>${doc.title}</h2>
-                    <button onclick="downloadAsPDF('${key}')" style="background:#F0B300;border:none;padding:5px 15px;border-radius:10px;cursor:pointer;">📄 Скачать PDF</button>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F0B300; padding-bottom:15px; margin-bottom:15px;">
+                    <h2 style="margin: 0;">${doc.title}</h2>
+                    <button onclick="downloadAsPDF('${key}')" style="background:#F0B300; border:none; padding:10px 20px; border-radius:12px; cursor:pointer; font-weight:bold; color:#1A1E24; white-space:nowrap; margin-left:15px;">📄 Скачать PDF</button>
                 </div>
                 <div>${doc.text}</div>
             `;
