@@ -359,21 +359,6 @@
         .modal-content .close:hover {
             transform: scale(1.2);
         }
-		/* Стили для модальных окон */
-.modal-content {
-    padding: 1.5rem; /* Уменьшаем отступы для мобильных устройств */
-}
-
-.modal-content h2 {
-    font-size: 1.5rem; /* Уменьшаем размер заголовка для мобильных устройств */
-    margin-bottom: 0.5rem;
-}
-
-.modal-content button {
-    width: 100%; /* Кнопка занимает всю ширину контейнера */
-    padding: 12px; /* Увеличиваем отступы для удобства нажатия */
-    font-size: 1rem; /* Увеличиваем размер текста */
-}
 		/* Скрываем полосу прокрутки для Firefox */
 * {
     scrollbar-width: none;
@@ -442,6 +427,51 @@
 
 #docContent strong {
     color: #FFD56B;
+}
+
+/* Новые стили для кнопки PDF и заголовка (из моего предложения выше) */
+.pdf-download-btn {
+    background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #1A1E24;
+    transition: all 0.2s;
+    box-shadow: none;
+    width: 100%; /* По умолчанию для мобильных — растянутая */
+    text-align: center;
+    margin-top: 10px; /* Отступ сверху для мобильных */
+}
+
+/* Для десктопа — компактная кнопка */
+@media (min-width: 768px) {
+    .pdf-download-btn {
+        width: auto; /* Не растянутая */
+        margin-top: 0; /* Без отступа сверху */
+        margin-left: 15px; /* Отступ слева от заголовка */
+    }
+}
+
+/* Flex для контейнера с заголовком и кнопкой */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Перенос на мобильных */
+    border-bottom: 1px solid #FFD56B;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    gap: 10px; /* Зазор между элементами */
+}
+
+.doc-header h2 {
+    margin: 0;
+    color: #F0B300;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(240, 179, 0, 0.2);
+    flex: 1; /* Заголовок занимает оставшееся пространство */
 }
     </style>
 </head>
@@ -639,7 +669,7 @@ window.openDocModal = function(key) {
     // Показываем модалку сразу, с заглушкой
     modal.style.display = 'flex';
     contentEl.innerHTML = `
-        <div style="border-bottom:1px solid #F0B300; padding-bottom:10px; margin-bottom:10px;">
+        <div class="doc-header">
             <h2>Загрузка...</h2>
         </div>
         <div><p>Пожалуйста, подождите, документ загружается...</p></div>
@@ -648,23 +678,9 @@ window.openDocModal = function(key) {
     loadDoc(key)
         .then(doc => {
             contentEl.innerHTML = `
-                <div style="border-bottom:1px solid #FFD56B; padding-bottom:15px; margin-bottom:15px;">
-                    <h2 style="margin: 0; color: #F0B300; font-weight: bold; text-shadow: 0 0 8px rgba(240, 179, 0, 0.2);">${doc.title}</h2>
-                    <button onclick="downloadAsPDF('${key}')" style="
-                        background: linear-gradient(135deg, #F0B300 0%, #FFB347 100%);
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 16px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        color: #1A1E24;
-                        transition: all 0.2s;
-                        box-shadow: none;
-                        display: block;
-                        width: 100%;
-                        text-align: center;
-                        margin-top: 10px;
-                    ">📄 Скачать PDF</button>
+                <div class="doc-header">
+                    <h2>${doc.title}</h2>
+                    <button onclick="downloadAsPDF('${key}')" class="pdf-download-btn">📄 Скачать PDF</button>
                 </div>
                 <div>${doc.text}</div>
             `;
@@ -672,7 +688,7 @@ window.openDocModal = function(key) {
         .catch(err => {
             console.error(err);
             contentEl.innerHTML = `
-                <div style="border-bottom:1px solid #F0B300; padding-bottom:10px; margin-bottom:10px;">
+                <div class="doc-header">
                     <h2>Ошибка</h2>
                 </div>
                 <div><p>Не удалось загрузить документ. Попробуйте обновить страницу позже.</p></div>
