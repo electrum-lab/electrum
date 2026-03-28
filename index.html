@@ -565,40 +565,6 @@
 </div>
 
 <script>
-// Примитивная "защита": мусорные переменные, чтобы запутать парсеры
-const fakePart1 = 'ZHVtbXkxMjM=';  // Фейковая часть, бесполезная
-const unusedVar = Math.random() * 100;  // Лишняя операция
-const fakeId = '123456789';  // Фейковый ID
-
-// Функция дешифровки (base64 + XOR с переменным ключом)
-function obfuscatedDecrypt(encoded, xorKey) {
-    let decoded = atob(encoded);  // Base64 decode
-    let result = '';
-    for (let i = 0; i < decoded.length; i++) {
-        result += String.fromCharCode(decoded.charCodeAt(i) ^ xorKey);
-    }
-    // Лишняя операция для запутывания
-    const dummy = result.split('').reverse().join('').slice(0, 1) + '';  
-    return result;
-}
-
-// Реальные зашифрованные части 
-const tokenPart1 = 'EhgYFx0dHBoX';  // Зашифрованная '8251089156' (base64 + XOR 42)
-const tokenPart2 = 'Kw==';  // Зашифрованная ':' (base64 + XOR 37)
-const tokenPart3 = 'QUFFcG5sejlaNTlzcDU5ajJZRTZfTGFFSUl2Wk9JdEJQTGstaw==';  
-const chatPart1 = 'NzU=';
-const chatPart2 = 'MTYxNTAz';
-// Функция для сборки token/id
-function getObfuscatedCredentials() {
-    // Лишние вычисления для запутывания
-    const temp = (unusedVar > 50 ? fakePart1 : 'ignored') + '';  // Использует фейк
-    const botToken = obfuscatedDecrypt(tokenPart1, 42) + obfuscatedDecrypt(tokenPart2, 37) + obfuscatedDecrypt(tokenPart3, 42);
-    const chatId = obfuscatedDecrypt(chatPart1, 37) + obfuscatedDecrypt(chatPart2, 42);
-    
-    // Ещё запутывание: конкатенация с пустой строкой
-    return { token: botToken + '', id: chatId + '' };
-}
-
 // Генерируем звёзды
 const starsContainer = document.getElementById('stars');
 for (let i = 0; i < 150; i++) {
@@ -644,6 +610,8 @@ function initPhoneMask() {
     });
 }
 initPhoneMask();
+
+// Остальной код
 
 // Конфиг документов: какой тип → заголовок и путь к файлу
 const docsConfig = {
@@ -777,8 +745,10 @@ document.getElementById('closeDocBtn').onclick = () =>
 document.getElementById('docModal').style.display = 'none';
 
 const form = document.getElementById('bookingForm');
+const PROXY_URL = 'https://tg-proxy.excursorsf.workers.dev';
 
 form.onsubmit = async (e) => {
+	
     e.preventDefault();
     
     const parentName = document.getElementById('parent_name').value;
@@ -799,21 +769,11 @@ form.onsubmit = async (e) => {
     const tgMsg = `🟡 <b>НОВАЯ ЗАПИСЬ</b>\n\n👤 Родитель: ${parentName}\n🧒 Ребенок: ${childName}\n📞 Тел: ${phone}\n📧 Email: ${email}\n\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\n\n🕐 ${time}\n🌐 IP: ${ip}`;
     const emailLog = `НОВАЯ ЗАПИСЬ\nРодитель: ${parentName}\nРебенок: ${childName}\nТелефон: ${phone}\nEmail: ${email}\n✅ С офертой ознакомлен: ДА\n✅ Согласие на обработку данных: ДА\nВремя: ${time}\nIP: ${ip}`;
 
-    // Получаем обфусцированные credentials
-    const creds = getObfuscatedCredentials();
-
-    // Отправка в TG
-    try {
-        const tgUrl = `https://api.telegram.org/bot${creds.token}/sendMessage?chat_id=${creds.id}&text=${encodeURIComponent(tgMsg)}&parse_mode=HTML`;
-        const response = await fetch(tgUrl, { method: 'POST' });
-        if (!response.ok) {
-            throw new Error('TG error: ' + response.status);
-        }
-        console.log('TG sent successfully');
-    } catch (err) {
-        console.error('TG Error:', err);
-        alert('Ошибка отправки в Telegram. Заявка сохранена по email.');
-    }
+    fetch(PROXY_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: tgMsg })
+    }).catch(err => console.error('TG Error:', err));
 
     const fd = new FormData(form);
     fd.append('full_log', emailLog);
@@ -823,7 +783,7 @@ form.onsubmit = async (e) => {
         headers: {'Accept': 'application/json'}
     }).catch(err => console.error('Email Error:', err));
 };
-// === Обработка прямых ссылок с параметром ?doc= ===
+	// === Обработка прямых ссылок с параметром ?doc= ===
 function openDocFromURL() {
     const params = new URLSearchParams(window.location.search);
     const docType = params.get('doc');
