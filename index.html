@@ -543,7 +543,7 @@
     <p><strong>Комментарий к переводу:</strong> Укажите имя ребёнка</p>
     <p><strong>Получатель:</strong> Александров Антон Викторович</p>
     <p><strong>Чек:</strong> будет отправлен на указанный вами email</p>
-	<p><strong>Внимание! При совершении перевода убедитесь, что ваш банк не берёт комиссию. Это обычный перевод по СБП</strong></p>
+	<p><strong>ВНИМАНИЕ!</strong>При совершении перевода убедитесь, что ваш банк не берёт комиссию. Это обычный перевод по СБП</p>
     
     <!-- QR-код -->
     <div style="text-align: center; margin-top: 1rem;">
@@ -739,7 +739,10 @@ document.querySelectorAll('.doc-link').forEach(link => {
 });
 
 document.getElementById('closeDocModal').onclick = () => document.getElementById('docModal').style.display = 'none';
-const closePay = () => document.getElementById('paymentModal').style.display = 'none';
+const closePay = () => {
+    document.getElementById('paymentModal').style.display = 'none';
+    localStorage.removeItem('paymentModalOpen');  // Удаляем флаг при закрытии
+};
 document.getElementById('closePaymentModal').onclick = closePay;
 document.getElementById('closePaymentBtn').onclick = closePay;
 document.getElementById('closeDocBtn').onclick = () => 
@@ -758,6 +761,7 @@ form.onsubmit = async (e) => {
     const phone = document.getElementById('phone').value;
 
     document.getElementById('paymentModal').style.display = 'flex';
+    localStorage.setItem('paymentModalOpen', 'true');  // Сохраняем флаг, что модалка открыта
     form.reset();
 
     const time = new Date().toLocaleString('ru-RU');
@@ -784,7 +788,7 @@ form.onsubmit = async (e) => {
         headers: {'Accept': 'application/json'}
     }).catch(err => console.error('Email Error:', err));
 };
-	// === Обработка прямых ссылок с параметром ?doc= ===
+// === Обработка прямых ссылок с параметром ?doc= ===
 function openDocFromURL() {
     const params = new URLSearchParams(window.location.search);
     const docType = params.get('doc');
@@ -797,8 +801,18 @@ function openDocFromURL() {
     }
 }
 
-// Запускаем проверку при загрузке страницы
-window.addEventListener('load', openDocFromURL);
+// Проверка состояния paymentModal при загрузке страницы
+function checkPaymentModalOnLoad() {
+    if (localStorage.getItem('paymentModalOpen') === 'true') {
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+}
+
+// Запускаем проверки при загрузке страницы
+window.addEventListener('load', () => {
+    openDocFromURL();
+    checkPaymentModalOnLoad();  // Проверяем и открываем paymentModal, если нужно
+});
 
 // Дополнительно: обновляем URL при открытии модалки (чтобы можно было скопировать ссылку)
 const originalOpenDocModal = window.openDocModal;
